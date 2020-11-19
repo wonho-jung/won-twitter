@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { authService, dbService } from "../fireabase";
 
-function Profile({ userObj }) {
+function Profile({ refreshUser, userObj }) {
   const history = useHistory();
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
   console.log(userObj);
@@ -23,6 +23,7 @@ function Profile({ userObj }) {
       await userObj.updateProfile({
         displayName: newDisplayName,
       });
+      refreshUser();
     }
   };
 
