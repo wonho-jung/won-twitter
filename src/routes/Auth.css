@@ -1,0 +1,33 @@
+.auth__Container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth__icon {
+  color: #04aaff;
+  margin-bottom: 30px;
+}
+
+.auth__Btns {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 320px;
+}
+.auth__Btn {
+  cursor: pointer;
+  border-radius: 20px;
+  border: none;
+  padding: 10px 0px;
+  font-size: 12px;
+  text-align: center;
+  width: 150px;
+  background: white;
+  cursor: pointer;
+}
+.auth__Btn__Icon {
+  margin-left: 5px;
+}

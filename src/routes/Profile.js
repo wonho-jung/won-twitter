@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { authService, dbService } from "../fireabase";
-
+import { authService } from "../fireabase";
+import "./Profile.css";
 function Profile({ refreshUser, userObj }) {
   const history = useHistory();
   const [newDisplayName, setNewDisplayName] = useState(userObj.displayName);
@@ -28,17 +28,25 @@ function Profile({ refreshUser, userObj }) {
   };
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
+    <div className="container">
+      <form onSubmit={onSubmit} className="profileForm">
         <input
           onChange={onChange}
           type="text"
+          autoFocus
           placeholder="Display Name"
           value={newDisplayName}
+          className="formInput"
         />
-        <input type="submit" value="Update Profile" />
+        <input
+          className="formBtn profileUpdate__input"
+          type="submit"
+          value="Update Profile"
+        />
       </form>
-      <button onClick={onLogOutClick}>Log Out</button>
+      <span className="formBtn cancelBtn logOut" onClick={onLogOutClick}>
+        Log Out
+      </span>
     </div>
   );
 }

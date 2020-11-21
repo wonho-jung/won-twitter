@@ -1,11 +1,16 @@
+import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { storageService, dbService } from "../fireabase";
-
+import "./HomeForm.css";
 function HomeForm({ userObj }) {
   const [Post, setPost] = useState("");
   const [fileStr, setFileStr] = useState("");
   const onSubmit = async (event) => {
+    if (Post === "") {
+      return;
+    }
     event.preventDefault();
     let attacUrl = "";
     if (fileStr !== "") {
@@ -44,25 +49,44 @@ function HomeForm({ userObj }) {
     };
     reader.readAsDataURL(theFile);
   };
-  const onClearFile = () => {
-    setFileStr(null);
-  };
+  const onClearFile = () => setFileStr("");
   return (
     <div>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} className="homeForm">
+        <div className="homeForm__container">
+          <input
+            className="homeForm__input"
+            value={Post}
+            onChange={onChange}
+            type="text"
+            placeholder="What's up?"
+            maxLength={120}
+          />
+          <input
+            type="submit"
+            value="&rarr;"
+            className="homeForm__inputArrow"
+          />
+        </div>
+
+        <label for="attach-file" className="homeform__label">
+          <span>Add photos</span>
+          <FontAwesomeIcon icon={faPlus} />
+        </label>
         <input
-          value={Post}
-          onChange={onChange}
-          type="text"
-          placeholder="What's up?"
-          maxLength={120}
+          className="homeForm__imgInput"
+          type="file"
+          id="attach-file"
+          accept="image/*"
+          onChange={onFileChange}
         />
-        <input type="file" accept="image/*" onChange={onFileChange} />
-        <input type="submit" value="Post" />
         {fileStr && (
-          <div>
-            <img src={fileStr} alt={fileStr} width="100px" height="100px" />
-            <button onClick={onClearFile}>Remove</button>
+          <div className="homeForm__attachment">
+            <img src={fileStr} alt={fileStr} className="homeForm__img" />
+            <div className="homeForm__clear " onClick={onClearFile}>
+              <span>Remove</span>
+              <FontAwesomeIcon icon={faTimes} />
+            </div>
           </div>
         )}
       </form>

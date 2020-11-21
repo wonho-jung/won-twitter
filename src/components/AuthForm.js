@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { authService } from "../fireabase";
-
+import "./AuthForm.css";
 function AuthForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,7 +37,7 @@ function AuthForm() {
   const toggleAccount = () => setNewAccount((prev) => !prev);
   return (
     <div>
-      <form onSubmit={onSumit}>
+      <form onSubmit={onSumit} className="container">
         <input
           name="email"
           type="text"
@@ -45,6 +45,7 @@ function AuthForm() {
           required
           value={email}
           onChange={onChange}
+          className="authForm__Input"
         />
         <input
           name="password"
@@ -53,11 +54,16 @@ function AuthForm() {
           required
           value={password}
           onChange={onChange}
+          className="authForm__Input"
         />
-        <input type="submit" value={newAccount ? "Create Account" : "SignIn"} />
-        {error}
+        <input
+          className="authForm__Input auth__Submit"
+          type="submit"
+          value={newAccount ? "Create Account" : "SignIn"}
+        />
+        {error && <span className="auth__Error">{error}</span>}
       </form>
-      <span onClick={toggleAccount}>
+      <span onClick={toggleAccount} className="auth__Switch">
         {newAccount ? "SignIn" : "Create Account"}
       </span>
     </div>

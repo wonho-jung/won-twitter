@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Tweet from "../components/Tweet";
-import { dbService, storageService } from "../fireabase";
-import { v4 as uuidv4 } from "uuid";
+import { dbService } from "../fireabase";
+
 import HomeForm from "../components/HomeForm";
 
 function Home({ userObj }) {
@@ -18,9 +18,9 @@ function Home({ userObj }) {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <HomeForm userObj={userObj} />
-      <div>
+      <div style={{ marginTop: 30 }}>
         {tweets.map((tweet) => (
           <Tweet
             key={tweet.id}
