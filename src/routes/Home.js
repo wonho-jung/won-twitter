@@ -6,7 +6,7 @@ import HomeForm from "../components/HomeForm";
 
 function Home({ userObj }) {
   const [tweets, setTweets] = useState([]);
-
+  console.log(tweets);
   useEffect(() => {
     dbService.collection("tweets").onSnapshot((snapshot) => {
       const tweetArray = snapshot.docs.map((doc) => ({
